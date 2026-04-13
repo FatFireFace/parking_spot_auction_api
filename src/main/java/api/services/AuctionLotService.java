@@ -35,10 +35,10 @@ public class AuctionLotService {
     public AuctionLotResponse addParkingSpotToAuction(Long auctionId, AuctionLotRequest request) throws SpotNotAvailableException, SpotAlreadyInAuctionException {
         log.info("Добавление парковочного места {} в аукцион {}", request.getParkingSpotId(), auctionId);
         Auction auction = auctionRepository.findById(auctionId)
-                .orElseThrow(() -> new EntityNotFoundException("Аукцион с id = " + auctionId + "не найден." ));
+                .orElseThrow(() -> new EntityNotFoundException("Аукцион с id = " + auctionId + " не найден." ));
 
         ParkingSpot spot = spotRepository.findById(request.getParkingSpotId())
-                .orElseThrow(() -> new EntityNotFoundException("Парковочное место с id = " + request.getParkingSpotId() + "не найдено."));
+                .orElseThrow(() -> new EntityNotFoundException("Парковочное место с id = " + request.getParkingSpotId() + " не найдено."));
 
         if (spot.getStatus() != ParkingStatus.AVAILABLE){
             log.warn("Поытка добавить место {} со статусом {}", spot.getId(), spot.getStatus());
